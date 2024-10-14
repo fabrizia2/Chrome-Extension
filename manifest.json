@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Tab Manager",
+    "version": "1.0",
+    "description": "Manage tabs, groups, and sessions easily.",
+    "permissions": [
+      "tabs",
+      "storage",
+      "activeTab",
+      "tabGroups",
+      "sessions",
+      "activeTab",
+      "background",
+      "unlimitedStorage"
+    ],
+    "action": {
+      "default_popup": "index.html",
+      "default_icon": {
+        
+      }
+    }
+    
+  }
+  

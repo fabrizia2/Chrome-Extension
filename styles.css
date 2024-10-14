@@ -1,0 +1,163 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 400px;
+    background-color: white; /* White background for the body */
+    color: black; /* Black text color */
+}
+
+header {
+    background-color: #004d00; /* Jungle green */
+    color: white;
+    padding: 15px 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.header-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+section {
+    padding: 15px;
+}
+
+.section-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.window {
+    background-color: white; /* White background for windows */
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.window-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.window-header > button.button-small {
+    margin-right: 10px; /* Space between button and title */
+}
+
+.window-header:hover {
+    background-color: #f1f1f1; /* Light grey on hover */
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.tab-list {
+    padding-left: 20px;
+    display: none; /* Start hidden */
+}
+
+.tab {
+    padding: 10px;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0; /* Light border for tabs */
+}
+
+span {
+    align-items: flex-start;
+    height: 50%;
+}
+.tab > button.button-smal {
+    margin-right: 1px; /* Space between button and title */
+    margin-left: -10px;
+    padding: 2px 5px;
+    background-color: rgb(189, 187, 187); /* Black background for small buttons */
+    color: rgb(5, 5, 5);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tab:last-child {
+    border-bottom: none; /* Remove border for the last tab */
+}
+
+.button {
+    display: block;
+    width: 90%;
+    padding: 12px;
+    margin-top: 15px;
+    text-align: center;
+    background-color: #004d00; /* Jungle green */
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #003300; /* Darker jungle green on hover */
+}
+
+.button-small {
+    padding: 2px 5px;
+    background-color: rgb(189, 187, 187); /* Black background for small buttons */
+    color: rgb(5, 5, 5);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-small:hover {
+    background-color: #333; /* Darker black on hover */
+}
+
+/* Footer Styles */
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.footer-button {
+    width: 90%; /* Match footer button width */
+}
+
+/* Group Styles */
+.group {
+    background-color: #f8f9fa; /* Light grey background for groups */
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s;
+}
+
+.group:hover {
+    background-color: #e9ecef; /* Slightly darker grey on hover */
+}
