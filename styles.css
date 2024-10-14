@@ -161,3 +161,34 @@ footer {
 .group:hover {
     background-color: #e9ecef; /* Slightly darker grey on hover */
 }
+
+.more-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.more-options-menu {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.more-options-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.more-options-menu ul li {
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.more-options-menu ul li:hover {
+    background-color: #f0f0f0;
+}
