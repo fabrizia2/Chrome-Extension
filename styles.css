@@ -41,7 +41,7 @@ section {
     font-weight: 500;
 }
 
-.window {
+.window, .group {
     background-color: white; /* White background for windows */
     margin-bottom: 15px;
     padding: 15px;
@@ -50,17 +50,17 @@ section {
     transition: transform 0.2s;
 }
 
-.window-header {
+.window-header, .group-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.window-header > button.button-small {
+.window-header, .group-header > button.button-small {
     margin-right: 10px; /* Space between button and title */
 }
 
-.window-header:hover {
+.window-header:hover, .group-header:hover {
     background-color: #f1f1f1; /* Light grey on hover */
 }
 

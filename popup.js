@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function deleteGroup(tabIds) {
         try {
-            console.log('We are deleting groups with tabs:', tabIds);
             await chrome.tabs.ungroup(tabIds);
         } catch (error){
             console.error('Error deleting group:', error);
@@ -75,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function discardTabs(tabs) {
         try {
             for (const tab of tabs) {
-                await discardTab(tab.id);
+                await discardTab(tab);
             }
         } catch (error) {
             console.error('Error deactivating tabs:', error);
@@ -116,13 +115,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //creating tab groups
-    async function createAddGroup(tabsIds, groupId = null) {
+    async function createAddGroup(tabsIds, groupId = null, groupTitle = null, groupColor = null) {
         try {
-            console.log(tabsIds);
             if (!groupId) {
-                await chrome.tabs.group({
+                const groupId = await chrome.tabs.group({
                     tabIds: tabsIds,
                 })
+                                
+                await chrome.tabGroups.update(groupId, {
+                    title: groupTitle,
+                    color: groupColor,
+                });
+                
             } else {
                 await chrome.tabs.group({
                     tabIds: tabsIds,
@@ -192,7 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             tabIds.push(tab.id);
                             
                         });
-                        console.log('tabids:', tabIds);
                         await deleteGroup(tabIds);
                     }
                     containerMap[dynamicNameDiv].remove();
@@ -202,7 +205,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 discardBtn.className = 'button-small';
                 discardBtn.textContent = '-';
                 discardBtn.onclick = async () => {
-                    await discardTabs(tabs);
+                    const tabsIds = [];
+                    tabs.forEach((tab) => {
+                        tabsIds.push(tab.id);
+                    })
+                    await discardTabs(tabsIds);
                 };
                 
                 
@@ -214,13 +221,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 const moreOptionsMenu = document.createElement('div');
                 moreOptionsMenu.style.display = 'none';
                 moreOptionsMenu.className = 'more-options-menu';
-                moreOptionsMenu.innerHTML = `
+                if (containerName === 'window') {
+                    moreOptionsMenu.innerHTML = `
                     <ul>
                         <li id="closeAllTabs">Close Selected Tabs</li>
                         <li id="groupselectedTabIds">Group Selected Tabs</li>
                         <li id="deactivateAllTabs">Deactivate Selected Tabs</li>
                     </ul>
                 `;
+                } else if (containerName === 'group') {
+                    moreOptionsMenu.innerHTML = `
+                    <ul>
+                        <li id="closeAllTabs">Close Selected Tabs</li>
+                        <li id="groupselectedTabIds">Move to another group</li>
+                        <li id="deactivateAllTabs">Deactivate Selected Tabs</li>
+                        <li id="removeselectedTabIds">Remove from group</li>
+                    </ul>
+                `;
+                    moreOptionsMenu.querySelector('#removeselectedTabIds').addEventListener('click', async () => {
+                        await deleteGroup(selectedTabIds);
+                    });
+                }
 
                 //moreButton.appendChild(moreOptionsMenu);
 
@@ -235,6 +256,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         await deleteTab(tabId);
                     }
                     containerMap[dynamicNameDiv].remove();
+                });
+
+                moreOptionsMenu.querySelector('#deactivateAllTabs').addEventListener('click', async () => {
+                    await discardTabs(selectedTabIds);  
                 });
 
                 const selectedGroupList = moreOptionsMenu.querySelector('#groupselectedTabIds');
@@ -255,55 +280,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 const createGroup = document.createElement('li');
                 createGroup.textContent = 'New Group';
+
+                createGroup.addEventListener('click', () => {
+                    inputDiv.style.display = 'block';
+                    groupList.style.display = groupList.style.display === 'none' ? 'block' : 'none';
+                });
+
                 const inputDiv = document.createElement('div');
                 inputDiv.style.display = 'none';
                 inputDiv.className = 'more-options-menu';
+
                 const inputText = document.createElement('input');
                 inputText.type = 'text';
                 inputText.id = 'groupName';
                 inputText.name = 'groupName';
-
-                const inputLabel = document.createElement('label');
-                inputLabel.for = 'groupName';
+                inputText.placeholder = 'Enter Group Name';
 
                 const selectColor = document.createElement('select');
                 selectColor.name = 'color';
+
                 const defaultColor = document.createElement('option');
                 defaultColor.textContent = 'please choose color';
                 defaultColor.value = '';
 
-                inputDiv.appendChild(inputLabel);
-                inputDiv.appendChild(inputText);
-                inputDiv.appendChild(selectColor);
                 selectColor.appendChild(defaultColor);
 
-                createGroup.appendChild(inputDiv)
-
                 const tabGroupColors = ['grey', 'blue', 'red', 'yellow', 'green', 'pink', 'purple', 'cyan', 'orange'];
-                for (const color of tabGroupColors) {
-                    const colorDiv =  document.createElement('div');
-                    colorDiv.classList.add('color');
-                    colorDiv.style.backgroundColor = color;
-                    colorDiv.textContent = ` ${color} `;
-
+                tabGroupColors.forEach((color) => {
                     const colorOption = document.createElement('option');
                     colorOption.value = color;
-
-                    colorOption.appendChild(colorDiv);
+                    colorOption.textContent = color.charAt(0).toUpperCase() + color.slice(1);
                     selectColor.appendChild(colorOption);
-                }
-                selectColor.addEventListener('change', () => {
-                    selectColor.value = value;
-                })
-                createGroup.addEventListener('click', async () => {
-                    await createAddGroup(selectedTabIds);
-                    chrome.tabGroups.onCreated.addListener((group) => {
-                        inputDiv.style.display = inputDiv.style.display === 'none' ? 'block' : 'none';
-                        group.title = inputText.value;
-                        group.color = selectColor.value;
-                    })
+               });
+
+                inputDiv.appendChild(inputText);
+                inputDiv.appendChild(selectColor);
+
+                const submitGroupBtn = document.createElement('button');
+                submitGroupBtn.textContent = 'Create Group';
+                submitGroupBtn.className = 'button-small';
+                submitGroupBtn.onclick = async () => {
+                    const groupName = inputText.value;
+                    const groupColor = selectColor.value;
+                    await createAddGroup(selectedTabIds, null, groupName, groupColor);
                     inputDiv.style.display = 'none';
-                })
+                };
+
+                inputDiv.appendChild(submitGroupBtn);
+                
                 createGroup.appendChild(inputDiv);
                 groupList.appendChild(createGroup);
                 selectedGroupList.appendChild(groupList);
@@ -328,6 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 tabs.forEach((tab) => {
                     const tabDiv = document.createElement('div');
                     tabDiv.className = 'tab';
+                    tabDiv.id = tab.id;
                     
                     const checkBoxDiv = document.createElement('div');
                     const checkBox = document.createElement('input');
