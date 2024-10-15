@@ -4,12 +4,15 @@ body {
     margin: 0;
     padding: 0;
     width: 400px;
-    background-color: white; /* White background for the body */
-    color: black; /* Black text color */
+    background-color: white;
+    /* White background for the body */
+    color: black;
+    /* Black text color */
 }
 
 header {
-    background-color: #004d00; /* Jungle green */
+    background-color: #004d00;
+    /* Jungle green */
     color: white;
     padding: 15px 10px;
     text-align: center;
@@ -41,8 +44,10 @@ section {
     font-weight: 500;
 }
 
-.window, .group {
-    background-color: white; /* White background for windows */
+.window,
+.group {
+    background-color: white;
+    /* White background for windows */
     margin-bottom: 15px;
     padding: 15px;
     border-radius: 8px;
@@ -50,18 +55,24 @@ section {
     transition: transform 0.2s;
 }
 
-.window-header, .group-header {
+.window-header,
+.group-header,
+.session {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.window-header, .group-header > button.button-small {
-    margin-right: 10px; /* Space between button and title */
+.window-header,
+.group-header>button.button-small {
+    margin-right: 10px;
+    /* Space between button and title */
 }
 
-.window-header:hover, .group-header:hover {
-    background-color: #f1f1f1; /* Light grey on hover */
+.window-header:hover,
+.group-header:hover {
+    background-color: #f1f1f1;
+    /* Light grey on hover */
 }
 
 .toggle-button {
@@ -73,7 +84,8 @@ section {
 
 .tab-list {
     padding-left: 20px;
-    display: none; /* Start hidden */
+    display: none;
+    /* Start hidden */
 }
 
 .tab {
@@ -82,18 +94,22 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #e0e0e0; /* Light border for tabs */
+    border-bottom: 1px solid #e0e0e0;
+    /* Light border for tabs */
 }
 
 span {
     align-items: flex-start;
     height: 50%;
 }
-.tab > button.button-smal {
-    margin-right: 1px; /* Space between button and title */
+
+.tab>button.button-smal {
+    margin-right: 1px;
+    /* Space between button and title */
     margin-left: -10px;
     padding: 2px 5px;
-    background-color: rgb(189, 187, 187); /* Black background for small buttons */
+    background-color: rgb(189, 187, 187);
+    /* Black background for small buttons */
     color: rgb(5, 5, 5);
     border: none;
     border-radius: 3px;
@@ -102,7 +118,8 @@ span {
 }
 
 .tab:last-child {
-    border-bottom: none; /* Remove border for the last tab */
+    border-bottom: none;
+    /* Remove border for the last tab */
 }
 
 .button {
@@ -111,7 +128,8 @@ span {
     padding: 12px;
     margin-top: 15px;
     text-align: center;
-    background-color: #004d00; /* Jungle green */
+    background-color: #004d00;
+    /* Jungle green */
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -119,12 +137,14 @@ span {
 }
 
 .button:hover {
-    background-color: #003300; /* Darker jungle green on hover */
+    background-color: #003300;
+    /* Darker jungle green on hover */
 }
 
 .button-small {
     padding: 2px 5px;
-    background-color: rgb(189, 187, 187); /* Black background for small buttons */
+    background-color: rgb(189, 187, 187);
+    /* Black background for small buttons */
     color: rgb(5, 5, 5);
     border: none;
     border-radius: 3px;
@@ -133,7 +153,8 @@ span {
 }
 
 .button-small:hover {
-    background-color: #333; /* Darker black on hover */
+    background-color: #333;
+    /* Darker black on hover */
 }
 
 /* Footer Styles */
@@ -145,12 +166,14 @@ footer {
 }
 
 .footer-button {
-    width: 90%; /* Match footer button width */
+    width: 90%;
+    /* Match footer button width */
 }
 
 /* Group Styles */
 .group {
-    background-color: #f8f9fa; /* Light grey background for groups */
+    background-color: #f8f9fa;
+    /* Light grey background for groups */
     margin: 10px 0;
     padding: 10px;
     border-radius: 5px;
@@ -159,7 +182,8 @@ footer {
 }
 
 .group:hover {
-    background-color: #e9ecef; /* Slightly darker grey on hover */
+    background-color: #e9ecef;
+    /* Slightly darker grey on hover */
 }
 
 .more-button {
