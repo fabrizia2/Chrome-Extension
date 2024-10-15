@@ -1,32 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tab Manager</title>
-    <link rel="icon" href="icons/icon16.png" type="image/png">
+    <link rel="icon" href="icons/tabs.png" type="image/png">
     <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
     <header>
-        <img src="icons/icon16.png" class="header-icon" alt="Icon">
+        <img src="icons/tabs.png" class="header-icon" alt="Icon">
         <h1>Tab Manager</h1>
     </header>
     <section id="currentTabs">
         <div class="section-title">Open Tabs</div>
-        <div id="windowList">
-            <!--div id="tabList">Tab 0</div>
-            <div class="window">
-                <ul>
-                    <li>Tab</li>
-                    <li>Tab</li>
-                </ul>
-                <button class="button-small" id="closeWindowBtn">Close</button>
-            </div-->
-            
-        </div>
-        
-        
+        <div id="windowList"></div>
     </section>
     <section id="savedGroups">
         <div class="section-title">Tab Groups</div>
@@ -38,11 +28,9 @@
         <div class="button" id="saveSessionBtn">Save Current Session</div>
     </section>
     <footer>
-        <div class="button" id="clearAllTabsBtn">Clear All Tabs</div>
-        <div class="button" id="clearAllGroupsBtn">Clear All Groups</div>
-        <div class="button" id="clearAllSessionsBtn">Clear All Sessions</div>
+        <a href="https://www.flaticon.com/free-icons/tab" title="tab icons">Tab icons created by Freepik - Flaticon</a>
     </footer>
-    <script src="popup.js"></script>
+    <script type="module" src="popup.js"></script>
 </body>
-</html>
 
+</html>
